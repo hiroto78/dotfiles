@@ -1,0 +1,17 @@
+escape ^Tt
+defencodig utf-8
+
+#split window
+bind s eval split focus "select 0"
+bind ^s eval split focus "select 0"
+
+# original key bind
+bind h prev
+bind l next
+# hardstatus alwayslastline "[%02c] %`%-w%{=b gw}%n %t%{-}%+w"
+caption always '%?%F%{= gW}%:%{= Kk}%?%2n%f%07=%t%='
+hardstatus alwayslastline '%m/%d %02c %{= .g}%H%{-} %L=%-w%45L>%{= g.}%n %t%{-}%+w %-17<%=%{= .y}(%l)'
+windowlist title  '%{u .g}Num Flags Title%='
+windowlist string '%{.g}%3n %{.y}%f%09=%{-} %t %='
+
+maptimeout 0
