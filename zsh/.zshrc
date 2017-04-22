@@ -5,8 +5,6 @@ NPM_PATH=/usr/local/bin/npm/bin
 export RBENV_ROOT=/usr/local/var/rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 export EDITOR="vim"
-eval "$(direnv hook zsh)"
-eval "$(direnv hook zsh)"
 export CC=/usr/bin/gcc
 export LS_COLORS='di=36'
 #############################################
