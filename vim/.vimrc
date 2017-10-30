@@ -43,7 +43,7 @@ map <silent> [Tag]h ;tabprevious<CR>
 filetype plugin indent off
 
 if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim.git/
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
     call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundleFetch 'Shougo/neobundle.vim'
     call neobundle#end()
@@ -147,3 +147,153 @@ set noerrorbells
 "拡張子ごとのタブなどの設定
 " filetype プラグインによる indent を on にする
 filetype plugin indent on
+
+" ファイル開くのをツリー型に
+NeoBundle 'scrooloose/nerdtree'
+
+" Git, Ggrep が使える
+NeoBundle 'tpope/vim-fugitive'
+" grep検索の実行後にQuickFix Listを表示する
+autocmd QuickFixCmdPost *grep* cwindow
+" ステータス行に現在のgitブランチを表示する
+set statusline+=%{fugitive#statusline()}
+"
+" 複数行のコメントアウト
+NeoBundle 'tomtom/tcomment_vim'
+"
+""""""""""""""""""""""""""""""
+" Ruby on rails のための設定
+""""""""""""""""""""""""""""""
+"
+"
+""""""""""""""
+" Rubocop
+""""""""""""""
+NeoBundle 'scrooloose/syntastic'
+" gem install rubocop
+NeoBundle 'scrooloose/syntastic'
+let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby'] }
+let g:syntastic_ruby_checkers = ['rubocop']
+""""""""""""""
+" endwise
+""""""""""""""
+NeoBundleLazy 'tpope/vim-endwise', {'autoload' : { 'insert' : 1,}}
+
+""""""""""""""
+" vim-autoclose
+""""""""""""""
+NeoBundle 'Townk/vim-autoclose'
+""""""""""""""
+" neocomplete
+""""""""""""""
+if has('lua')
+  NeoBundleLazy 'Shougo/neocomplete.vim', {
+    \ 'depends' : 'Shougo/vimproc',
+    \ 'autoload' : { 'insert' : 1,}
+    \ }
+endif
+
+" neocomplete {{{
+let g:neocomplete#enable_at_startup               = 1
+let g:neocomplete#auto_completion_start_length    = 3
+let g:neocomplete#enable_ignore_case              = 1
+let g:neocomplete#enable_smart_case               = 1
+let g:neocomplete#enable_camel_case               = 1
+"let g:neocomplete#use_vimproc                     = 1 "なんかエラーでる
+let g:neocomplete#sources#buffer#cache_limit_size = 1000000
+let g:neocomplete#sources#tags#cache_limit_size   = 30000000
+let g:neocomplete#enable_fuzzy_completion         = 1
+let g:neocomplete#lock_buffer_name_pattern        = '\*ku\*'
+" }}}
+
+"""""""""""""""
+"" Yankround
+"""""""""""""""
+NeoBundle 'LeafCage/yankround.vim'
+" yankround.vim {{{
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+let g:yankround_max_history = 100
+nnoremap <Leader><C-p> :<C-u>Unite yankround<CR>
+"}}}
+
+"""""""""""""""
+"" matchit
+"""""""""""""""
+":source $VIMRUNTIMEmacros/matchit.vim "なんか動いてない気がする
+
+"""""""""""""""
+"" vim-rails
+"""""""""""""""
+autocmd User Rails.view*                 NeoSnippetSource ~/.vim/snippet/ruby.rails.view.snip
+autocmd User Rails.controller*           NeoSnippetSource ~/.vim/snippet/ruby.rails.controller.snip
+autocmd User Rails/db/migrate/*          NeoSnippetSource ~/.vim/snippet/ruby.rails.migrate.snip
+autocmd User Rails/config/routes.rb      NeoSnippetSource ~/.vim/snippet/ruby.rails.route.snip
+
+
+
+
+"""""""""""""""
+"" Rsense
+"""""""""""""""
+"" dein
+"" Vim起動完了時にインストール
+"augroup PluginInstall
+"  autocmd!
+"  autocmd VimEnter * if dein#check_install() | call dein#install() | endif
+"augroup END
+"
+"" 各プラグインをインストールするディレクトリ
+"let s:plugin_dir = expand('~/.vim/')
+"
+"" dein.vimをインストールするディレクトリをランタイムパスへ追加
+"let s:dein_dir = s:plugin_dir . 'repos/github.com/Shougo/dein.vim'
+"execute 'set runtimepath+=' . s:dein_dir
+"
+"" dein.vimがまだ入ってなければ 最初に git clone
+"if !isdirectory(s:dein_dir)
+"  call mkdir(s:dein_dir, 'p')
+"  silent execute printf('!git clone %s %s', 'https://github.com/Shougo/dein.vim', s:dein_dir)
+"endif
+"
+""dein plugin settings
+"if dein#load_state(s:plugin_dir)
+"  call dein#begin(s:plugin_dir)
+"endif
+"
+"" ここからインストールするプラグイン
+"call dein#add('Shougo/dein.vim')
+"call dein#add('Shougo/neocomplcache.vim')
+"call dein#add('Shougo/neocomplcache-rsense.vim')
+"
+"
+"" neocomplcacheの設定
+"" Disable AutoComplPop.
+"let g:acp_enableAtStartup = 0
+"
+"" Use neocomplcache.
+"let g:neocomplcache_enable_at_startup = 1
+"
+"" Use smartcase.
+"let g:neocomplcache_enable_smart_case = 1
+"
+"" Set minimum syntax keyword length.
+"let g:neocomplcache_min_syntax_length = 3
+"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+"
+"let g:neocomplcache_enable_camel_case_completion = 1
+"let g:neocomplcache_enable_underbar_completion = 1
+"
+"
+"" Rsense用の設定
+"if !exists('g:neocomplcache_omni_patterns')
+"    let g:neocomplcache_omni_patterns = {}
+"endif
+"let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+"
+""rsenseのインストールフォルダがデフォルトと異なるので設定
+"let g:rsenseHome = expand("/home/newlight/.rbenv/shims/rsense")
+"let g:rsenseUseOmniFunc = 1
