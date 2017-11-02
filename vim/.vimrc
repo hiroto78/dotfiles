@@ -1,8 +1,14 @@
-"start of tab setting
+""""""""""""""""""""""""""""""""
+" .vimrc
+""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""
+" vim の基本的な設定 はじめ
+""""""""""""""""""""""""""""""""
 function! s:SID_PREFIX()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
 endfunction
 
+" tab の設定
 function! s:my_tabline()  "{{{
 	let s = ''
 	for i in range(1, tabpagenr('$'))
@@ -29,42 +35,14 @@ nmap    t [Tag]
 for n in range(1, 9)
 	execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
 endfor
-
+"End of tab setting 上はわざとセミコロンとコロンを入れ替えている
 map <silent> [Tag]c ;tablast <bar> tabnew<CR>
 map <silent> [Tag]x ;tabclose<CR>
 map <silent> [Tag]l ;tabnext<CR>
 map <silent> [Tag]h ;tabprevious<CR>
-"End of tab setting 上はわざとセミコロンとコロンを入れ替えている
-
-"imap = 
-"imap =
-
-" neobundle.vim
+"
 filetype plugin indent off
 
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-    call neobundle#begin(expand('~/.vim/bundle/'))
-    NeoBundleFetch 'Shougo/neobundle.vim'
-    call neobundle#end()
-endif
-
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'git://github.com/thinca/vim-quickrun.git'
-NeoBundle "ctrlpvim/ctrlp.vim"
-NeoBundle 'tomasr/molokai'
-NeoBundle 'vim-scripts/robokai'
-filetype plugin on
-colorscheme molokai
-set t_Co=256
-syntax on
-let g:molokai_original = 1
-set background=dark
-
-" /neobundle.vim
 " 行末、行頭の移動をlinuxと同じコマンドにする
 nnoremap <C-a> 0
 inoremap <C-a> <Esc>0<Insert>
@@ -148,6 +126,54 @@ set noerrorbells
 " filetype プラグインによる indent を on にする
 filetype plugin indent on
 
+" vim のマウス操作
+if has('mouse')
+    set mouse=a
+    if has('mouse_sgr')
+        set ttymouse=sgr
+    elseif v:version > 703 || v:version is 703 && has('patch632')
+        set ttymouse=sgr
+    else
+        set ttymouse=xterm2
+    endif
+endif
+
+""""""""""""""""""""""""""""""""
+" vim の基本的な設定 おわり
+""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""
+" 基本的なNeoBundle はじめ
+""""""""""""""""""""""""""""""""
+" neobundle.vim
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    call neobundle#begin(expand('~/.vim/bundle/'))
+    NeoBundleFetch 'Shougo/neobundle.vim'
+    call neobundle#end()
+endif
+
+" NeoBundle はじめ
+call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'https://github.com/thinca/vim-quickrun.git'
+NeoBundle "ctrlpvim/ctrlp.vim"
+NeoBundle 'vim-scripts/robokai'
+
+" インデントの可視化
+NeoBundle 'Yggdroot/indentLine'
+
+" color schema
+NeoBundle 'tomasr/molokai'
+let g:molokai_original = 1
+filetype plugin on
+colorscheme molokai
+set t_Co=256
+syntax on
+let g:molokai_original = 1
+set background=dark
+
 " ファイル開くのをツリー型に
 NeoBundle 'scrooloose/nerdtree'
 
@@ -158,57 +184,21 @@ autocmd QuickFixCmdPost *grep* cwindow
 " ステータス行に現在のgitブランチを表示する
 set statusline+=%{fugitive#statusline()}
 "
+
 " 複数行のコメントアウト
+" visual 選択後に ctrl - -
 NeoBundle 'tomtom/tcomment_vim'
-"
-""""""""""""""""""""""""""""""
-" Ruby on rails のための設定
-""""""""""""""""""""""""""""""
-"
-"
-""""""""""""""
-" Rubocop
-""""""""""""""
-NeoBundle 'scrooloose/syntastic'
-" gem install rubocop
-NeoBundle 'scrooloose/syntastic'
-let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby'] }
-let g:syntastic_ruby_checkers = ['rubocop']
-""""""""""""""
+
 " endwise
-""""""""""""""
+" def や end を補完
 NeoBundleLazy 'tpope/vim-endwise', {'autoload' : { 'insert' : 1,}}
 
-""""""""""""""
 " vim-autoclose
-""""""""""""""
+" 括弧を補完
 NeoBundle 'Townk/vim-autoclose'
-""""""""""""""
-" neocomplete
-""""""""""""""
-if has('lua')
-  NeoBundleLazy 'Shougo/neocomplete.vim', {
-    \ 'depends' : 'Shougo/vimproc',
-    \ 'autoload' : { 'insert' : 1,}
-    \ }
-endif
 
-" neocomplete {{{
-let g:neocomplete#enable_at_startup               = 1
-let g:neocomplete#auto_completion_start_length    = 3
-let g:neocomplete#enable_ignore_case              = 1
-let g:neocomplete#enable_smart_case               = 1
-let g:neocomplete#enable_camel_case               = 1
-"let g:neocomplete#use_vimproc                     = 1 "なんかエラーでる
-let g:neocomplete#sources#buffer#cache_limit_size = 1000000
-let g:neocomplete#sources#tags#cache_limit_size   = 30000000
-let g:neocomplete#enable_fuzzy_completion         = 1
-let g:neocomplete#lock_buffer_name_pattern        = '\*ku\*'
-" }}}
-
-"""""""""""""""
-"" Yankround
-"""""""""""""""
+" Yankround
+" コピペを使いまわせる
 NeoBundle 'LeafCage/yankround.vim'
 " yankround.vim {{{
 nmap p <Plug>(yankround-p)
@@ -219,81 +209,104 @@ let g:yankround_max_history = 100
 nnoremap <Leader><C-p> :<C-u>Unite yankround<CR>
 "}}}
 
-"""""""""""""""
 "" matchit
-"""""""""""""""
-":source $VIMRUNTIMEmacros/matchit.vim "なんか動いてない気がする
+""なんか動いてない気がするので一旦コメントアウト
+":source $VIMRUNTIMEmacros/matchit.vim
 
-"""""""""""""""
+" neocomplete・neosnippet
+if has('lua') " lua機能が有効になっている場合・・・・・・
+    " コードの自動補完
+    NeoBundle 'Shougo/neocomplete.vim'
+    " スニペットの補完機能
+    NeoBundle "Shougo/neosnippet"
+    " スニペット集
+    NeoBundle 'Shougo/neosnippet-snippets'
+endif
+" neocomplete・neosnippetの設定
+if neobundle#is_installed('neocomplete.vim')
+    " Vim起動時にneocompleteを有効にする
+    let g:neocomplete#enable_at_startup = 1
+    " smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
+    let g:neocomplete#enable_smart_case = 1
+    " 3文字以上の単語に対して補完を有効にする
+    let g:neocomplete#min_keyword_length = 3
+    " 区切り文字まで補完する
+    let g:neocomplete#enable_auto_delimiter = 1
+    " 1文字目の入力から補完のポップアップを表示
+    let g:neocomplete#auto_completion_start_length = 1
+    " バックスペースで補完のポップアップを閉じる
+    inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
+
+    " エンターキーで補完候補の確定. スニペットの展開もエンターキーで確定・・・・・・②
+    "imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
+    " タブキーで補完候補の選択. スニペット内のジャンプもタブキーでジャンプ・・・・・・③
+    "imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
+endif
+
+""""""""""""""""""""""""""""""""
+" 基本的なNeoBundle おわり
+""""""""""""""""""""""""""""""""
+"
+""""""""""""""""""""""""""""""""
+" 基本的な Linter の設定はじめ
+""""""""""""""""""""""""""""""""
+" Rubocop
+" gem install rubocop
+NeoBundle 'scrooloose/syntastic'
+let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby', 'javascript'] }
+let g:syntastic_ruby_checkers = ['rubocop', 'eslint']
+
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'pmsorhaindo/syntastic-local-eslint.vim'
+
+" ここから下は Syntastic のおすすめの設定
+" ref. https://github.com/scrooloose/syntastic#settings
+
+" エラー行に sign を表示
+let g:syntastic_enable_signs = 1
+" location list を常に更新
+let g:syntastic_always_populate_loc_list = 0
+" location list を常に表示
+let g:syntastic_auto_loc_list = 0
+" ファイルを開いた時にチェックを実行する
+let g:syntastic_check_on_open = 1
+" :wq で終了する時もチェックする
+let g:syntastic_check_on_wq = 0
+
+""""""""""""""""""""""""""""""""
+" 基本的な Linter の設定おわり
+""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+" Ruby や ROR のための設定はじめ
+""""""""""""""""""""""""""""""
 "" vim-rails
-"""""""""""""""
 autocmd User Rails.view*                 NeoSnippetSource ~/.vim/snippet/ruby.rails.view.snip
 autocmd User Rails.controller*           NeoSnippetSource ~/.vim/snippet/ruby.rails.controller.snip
 autocmd User Rails/db/migrate/*          NeoSnippetSource ~/.vim/snippet/ruby.rails.migrate.snip
 autocmd User Rails/config/routes.rb      NeoSnippetSource ~/.vim/snippet/ruby.rails.route.snip
+""""""""""""""""""""""""""""""
+" Ruby や ROR のための設定おわり
+""""""""""""""""""""""""""""""
 
 
+""""""""""""""""""""""""""""""
+" JS のための設定はじめ
+""""""""""""""""""""""""""""""
+"react native
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+
+"" tern (react)
+NeoBundle 'marijnh/tern_for_vim', {
+  \ 'build': {
+  \   'others': 'npm install'
+  \}}
+""""""""""""""""""""""""""""""
+" JS のための設定おわり
+""""""""""""""""""""""""""""""
 
 
-"""""""""""""""
-"" Rsense
-"""""""""""""""
-"" dein
-"" Vim起動完了時にインストール
-"augroup PluginInstall
-"  autocmd!
-"  autocmd VimEnter * if dein#check_install() | call dein#install() | endif
-"augroup END
-"
-"" 各プラグインをインストールするディレクトリ
-"let s:plugin_dir = expand('~/.vim/')
-"
-"" dein.vimをインストールするディレクトリをランタイムパスへ追加
-"let s:dein_dir = s:plugin_dir . 'repos/github.com/Shougo/dein.vim'
-"execute 'set runtimepath+=' . s:dein_dir
-"
-"" dein.vimがまだ入ってなければ 最初に git clone
-"if !isdirectory(s:dein_dir)
-"  call mkdir(s:dein_dir, 'p')
-"  silent execute printf('!git clone %s %s', 'https://github.com/Shougo/dein.vim', s:dein_dir)
-"endif
-"
-""dein plugin settings
-"if dein#load_state(s:plugin_dir)
-"  call dein#begin(s:plugin_dir)
-"endif
-"
-"" ここからインストールするプラグイン
-"call dein#add('Shougo/dein.vim')
-"call dein#add('Shougo/neocomplcache.vim')
-"call dein#add('Shougo/neocomplcache-rsense.vim')
-"
-"
-"" neocomplcacheの設定
-"" Disable AutoComplPop.
-"let g:acp_enableAtStartup = 0
-"
-"" Use neocomplcache.
-"let g:neocomplcache_enable_at_startup = 1
-"
-"" Use smartcase.
-"let g:neocomplcache_enable_smart_case = 1
-"
-"" Set minimum syntax keyword length.
-"let g:neocomplcache_min_syntax_length = 3
-"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-"
-"let g:neocomplcache_enable_camel_case_completion = 1
-"let g:neocomplcache_enable_underbar_completion = 1
-"
-"
-"" Rsense用の設定
-"if !exists('g:neocomplcache_omni_patterns')
-"    let g:neocomplcache_omni_patterns = {}
-"endif
-"let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-"
-""rsenseのインストールフォルダがデフォルトと異なるので設定
-"let g:rsenseHome = expand("/home/newlight/.rbenv/shims/rsense")
-"let g:rsenseUseOmniFunc = 1
+" NeoBundle おわり
+call neobundle#end()
