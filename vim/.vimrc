@@ -159,6 +159,8 @@ NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
 NeoBundle "ctrlpvim/ctrlp.vim"
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.jpg,*.png
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|build)$'
 NeoBundle 'vim-scripts/robokai'
 
 " インデントの可視化
@@ -253,11 +255,13 @@ endif
 " Rubocop
 " gem install rubocop
 NeoBundle 'scrooloose/syntastic'
-let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby', 'javascript'] }
-let g:syntastic_ruby_checkers = ['rubocop', 'eslint']
+"NeoBundle 'pmsorhaindo/syntastic-local-eslint.vim'
+let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby'] }
+let g:syntastic_ruby_checkers = ['rubocop']
 
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'pmsorhaindo/syntastic-local-eslint.vim'
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
+
 
 " ここから下は Syntastic のおすすめの設定
 " ref. https://github.com/scrooloose/syntastic#settings
