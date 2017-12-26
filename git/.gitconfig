@@ -1,6 +1,6 @@
 [user]
 	name = Hiroto Naya
-	email = hiroto.naya.78@gmail.com
+	email = naya@newlight.jp
 [color]
 	# colorの設定(以下のコマンドは自動で色つける)
 	status = auto
@@ -17,6 +17,7 @@
 [push]
 	default = matching
 [alias]
+	br = branch
 	st = status
 	sh = show
 	so = remote show origin
@@ -25,5 +26,5 @@
 	rbm = rebase master      # masterへのrebaseはよく使うのでalias
 	ad = add
 	ci = commit -a           # modifiedなファイルを全てstageへ
-	cam = commit -a --amend  # 直前のcommitを修正
 	ch = checkout
+	co = commit
