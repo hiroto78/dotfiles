@@ -2,7 +2,7 @@ export NODE_PATH=/usr/local/lib/node_modules
 #export PATH=/usr/local/bin:$PATH
 NPM_PATH=/usr/local/bin/npm/bin
 #export PATH=/usr/local/bin:~/bin:$NPM_PATH:$NODE_PATH:$PATH
-export RBENV_ROOT=/usr/local/var/rbenv
+#export RBENV_ROOT=/usr/local/var/rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 export EDITOR="vim"
 export CC=/usr/bin/gcc
@@ -189,3 +189,16 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 nvm use default
 npm_dir=${NVM_PATH}_modules
 export NODE_PATH=$npm_dir
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+function peco-select-history() {
+    # historyを番号なし、逆順、最初から表示。
+    # 順番を保持して重複を削除。
+    # カーソルの左側の文字列をクエリにしてpecoを起動
+    # \nを改行に変換
+    BUFFER="$(history -nr 1 | awk '!a[$0]++' | peco --query "$LBUFFER" | sed 's/\\n/\n/')"
+    CURSOR=$#BUFFER             # カーソルを文末に移動
+    zle -R -c                   # refresh
+}
