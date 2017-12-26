@@ -1,8 +1,14 @@
-"start of tab setting
+""""""""""""""""""""""""""""""""
+" .vimrc
+""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""
+" vim の基本的な設定 はじめ
+""""""""""""""""""""""""""""""""
 function! s:SID_PREFIX()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
 endfunction
 
+" tab の設定
 function! s:my_tabline()  "{{{
 	let s = ''
 	for i in range(1, tabpagenr('$'))
@@ -29,42 +35,14 @@ nmap    t [Tag]
 for n in range(1, 9)
 	execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
 endfor
-
+"End of tab setting 上はわざとセミコロンとコロンを入れ替えている
 map <silent> [Tag]c ;tablast <bar> tabnew<CR>
 map <silent> [Tag]x ;tabclose<CR>
 map <silent> [Tag]l ;tabnext<CR>
 map <silent> [Tag]h ;tabprevious<CR>
-"End of tab setting 上はわざとセミコロンとコロンを入れ替えている
-
-"imap = 
-"imap =
-
-" neobundle.vim
+"
 filetype plugin indent off
 
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim.git/
-    call neobundle#begin(expand('~/.vim/bundle/'))
-    NeoBundleFetch 'Shougo/neobundle.vim'
-    call neobundle#end()
-endif
-
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'git://github.com/thinca/vim-quickrun.git'
-NeoBundle "ctrlpvim/ctrlp.vim"
-NeoBundle 'tomasr/molokai'
-NeoBundle 'vim-scripts/robokai'
-filetype plugin on
-colorscheme molokai
-set t_Co=256
-syntax on
-let g:molokai_original = 1
-set background=dark
-
-" /neobundle.vim
 " 行末、行頭の移動をlinuxと同じコマンドにする
 nnoremap <C-a> 0
 inoremap <C-a> <Esc>0<Insert>
@@ -147,3 +125,265 @@ set noerrorbells
 "拡張子ごとのタブなどの設定
 " filetype プラグインによる indent を on にする
 filetype plugin indent on
+
+" vim のマウス操作
+if has('mouse')
+    set mouse=a
+    if has('mouse_sgr')
+        set ttymouse=sgr
+    elseif v:version > 703 || v:version is 703 && has('patch632')
+        set ttymouse=sgr
+    else
+        set ttymouse=xterm2
+    endif
+endif
+
+""""""""""""""""""""""""""""""""
+" vim の基本的な設定 おわり
+""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""
+" 基本的なNeoBundle はじめ
+""""""""""""""""""""""""""""""""
+" neobundle.vim
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    call neobundle#begin(expand('~/.vim/bundle/'))
+    NeoBundleFetch 'Shougo/neobundle.vim'
+    call neobundle#end()
+endif
+
+" NeoBundle はじめ
+call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'https://github.com/thinca/vim-quickrun.git'
+NeoBundle "ctrlpvim/ctrlp.vim"
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.jpg,*.png
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|build)$'
+NeoBundle 'vim-scripts/robokai'
+
+" インデントの可視化
+NeoBundle 'Yggdroot/indentLine'
+
+" color schema
+NeoBundle 'tomasr/molokai'
+let g:molokai_original = 1
+filetype plugin on
+colorscheme molokai
+set t_Co=256
+syntax on
+let g:molokai_original = 1
+set background=dark
+
+" ファイル開くのをツリー型に
+NeoBundle 'scrooloose/nerdtree'
+
+" Git, Ggrep が使える
+NeoBundle 'tpope/vim-fugitive'
+" grep検索の実行後にQuickFix Listを表示する
+autocmd QuickFixCmdPost *grep* cwindow
+" ステータス行に現在のgitブランチを表示する
+set statusline+=%{fugitive#statusline()}
+"
+
+" 複数行のコメントアウト
+" visual 選択後に ctrl - -
+NeoBundle 'tomtom/tcomment_vim'
+
+" endwise
+" def や end を補完
+NeoBundleLazy 'tpope/vim-endwise', {'autoload' : { 'insert' : 1,}}
+
+" vim-autoclose
+" 括弧を補完
+NeoBundle 'Townk/vim-autoclose'
+
+" Yankround
+" コピペを使いまわせる
+NeoBundle 'LeafCage/yankround.vim'
+" yankround.vim {{{
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+let g:yankround_max_history = 100
+nnoremap <Leader><C-p> :<C-u>Unite yankround<CR>
+"}}}
+
+"" matchit
+""なんか動いてない気がするので一旦コメントアウト
+":source $VIMRUNTIMEmacros/matchit.vim
+
+" neocomplete・neosnippet
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle "Shougo/neosnippet"
+" スニペット集
+NeoBundle 'Shougo/neosnippet-snippets'
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+
+
+
+
+
+
+""""""""""""""""""""""""""""""""
+" 基本的なNeoBundle おわり
+""""""""""""""""""""""""""""""""
+"
+""""""""""""""""""""""""""""""""
+" 基本的な Linter の設定はじめ
+""""""""""""""""""""""""""""""""
+" Rubocop
+" gem install rubocop
+NeoBundle 'scrooloose/syntastic'
+"NeoBundle 'pmsorhaindo/syntastic-local-eslint.vim'
+let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby'] }
+let g:syntastic_ruby_checkers = ['rubocop']
+
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
+
+
+" ここから下は Syntastic のおすすめの設定
+" ref. https://github.com/scrooloose/syntastic#settings
+
+" エラー行に sign を表示
+let g:syntastic_enable_signs = 1
+" location list を常に更新
+let g:syntastic_always_populate_loc_list = 0
+" location list を常に表示
+let g:syntastic_auto_loc_list = 0
+" ファイルを開いた時にチェックを実行する
+let g:syntastic_check_on_open = 1
+" :wq で終了する時もチェックする
+let g:syntastic_check_on_wq = 0
+
+""""""""""""""""""""""""""""""""
+" 基本的な Linter の設定おわり
+""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+" Ruby や ROR のための設定はじめ
+""""""""""""""""""""""""""""""
+"" vim-rails
+autocmd User Rails.view*                 NeoSnippetSource ~/.vim/snippet/ruby.rails.view.snip
+autocmd User Rails.controller*           NeoSnippetSource ~/.vim/snippet/ruby.rails.controller.snip
+autocmd User Rails/db/migrate/*          NeoSnippetSource ~/.vim/snippet/ruby.rails.migrate.snip
+autocmd User Rails/config/routes.rb      NeoSnippetSource ~/.vim/snippet/ruby.rails.route.snip
+""""""""""""""""""""""""""""""
+" Ruby や ROR のための設定おわり
+""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""
+" JS のための設定はじめ
+""""""""""""""""""""""""""""""
+"react native
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+
+"" tern (react)
+NeoBundle 'marijnh/tern_for_vim', {
+  \ 'build': {
+  \   'others': 'npm install'
+  \}}
+""""""""""""""""""""""""""""""
+" JS のための設定おわり
+""""""""""""""""""""""""""""""
+
+
+" NeoBundle おわり
+call neobundle#end()
