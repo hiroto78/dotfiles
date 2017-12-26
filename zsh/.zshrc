@@ -202,3 +202,8 @@ function peco-select-history() {
     CURSOR=$#BUFFER             # カーソルを文末に移動
     zle -R -c                   # refresh
 }
+
+# android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
