@@ -31,9 +31,15 @@ SAVEHIST=1000000
     
 # プロンプト
 # 1行表示
-# PROMPT="%~ %# "
-# 2行表示
-PROMPT="%{${fg[green]}%}[%n@nayaPC]%{${reset_color}%} %~ %# "
+case ${OSTYPE} in
+  darwin*)
+    PROMPT="%{${fg[magenta]}%}[%n@mac]%{${reset_color}%} %~ %# "
+    ;;
+  linux*)
+    PROMPT="%{${fg[green]}%}[%n@linux]%{${reset_color}%} %~ %# "
+    ;;
+esac
+
      
       
 # 単語の区切り文字を指定する
@@ -185,7 +191,7 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 ###########################################
 # nvm
 ###########################################
-[[ -s /Users/hiroto/.nvm/nvm.sh ]] && . /Users/hiroto/.nvm/nvm.sh
+[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh
 nvm use default
 npm_dir=${NVM_PATH}_modules
 export NODE_PATH=$npm_dir
