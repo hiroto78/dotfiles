@@ -160,7 +160,11 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'https://github.com/thinca/vim-quickrun.git'
 NeoBundle "ctrlpvim/ctrlp.vim"
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.jpg,*.png
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|build)$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|build|local)$'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" let g:ctrlp_use_caching=0
+" let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g'
 NeoBundle 'vim-scripts/robokai'
 
 " インデントの可視化
@@ -312,11 +316,30 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
+NeoBundle 'rking/ag.vim'
+NeoBundle 'Shougo/vimproc.vim'
 
+" insert modeで開始
+let g:unite_enable_start_insert = 1
 
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
 
+" grep検索
+nnoremap <silent> <C-c><C-c>  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
 
+" カーソル位置の単語をgrep検索
+nnoremap <silent> <C-f><C-f> :<C-u>Unite grep:. -default-action=tabopen -buffer-name=search-buffer<CR><C-R><C-W>
 
+" grep検索結果の再呼出
+nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
+
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
 
 """"""""""""""""""""""""""""""""
 " 基本的なNeoBundle おわり
@@ -335,6 +358,8 @@ let g:syntastic_python_checkers = ['flake8']
 
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
+let g:syntastic_enable_perl_checker = 1
+let g:syntastic_perl_checkers = ['perl', 'podchecker']
 
 
 " ここから下は Syntastic のおすすめの設定
@@ -367,7 +392,6 @@ autocmd User Rails/config/routes.rb      NeoSnippetSource ~/.vim/snippet/ruby.ra
 " Ruby や ROR のための設定おわり
 """"""""""""""""""""""""""""""
 
-
 """"""""""""""""""""""""""""""
 " JS のための設定はじめ
 """"""""""""""""""""""""""""""
@@ -384,7 +408,10 @@ NeoBundle 'marijnh/tern_for_vim', {
 """"""""""""""""""""""""""""""
 " JS のための設定おわり
 """"""""""""""""""""""""""""""
-
+NeoBundle 'vim-perl/vim-perl'
 
 " NeoBundle おわり
 call neobundle#end()
+
+set tags=.tags
+nnoremap <c-i><c-i> :tab tag <c-r><c-w><cr>
