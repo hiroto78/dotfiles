@@ -8,6 +8,10 @@
 	branch = auto
 	interactive = auto
 	grep = auto
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = cyan
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
