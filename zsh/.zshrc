@@ -6,7 +6,8 @@ NPM_PATH=/usr/local/bin/npm/bin
 export PATH="$HOME/.rbenv/bin:$PATH"
 export EDITOR="vim"
 export CC=/usr/bin/gcc
-export LS_COLORS='di=36'
+# export LS_COLORS='di=36'
+export LSCOLORS=ExFxCxDxBxegedabagacad
 #############################################
 # 少し凝った zshrc
 # # License : MIT
@@ -137,6 +138,7 @@ alias ll='ls -l'
 alias vag='vagrant'
 
 alias rm='rm -i'
+alias tig='tig --all'
 alias cp='cp -i'
 alias mv='mv -i'
 
