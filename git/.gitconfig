@@ -32,3 +32,8 @@
 	ci = commit -a           # modifiedなファイルを全てstageへ
 	ch = checkout
 	co = commit
+	df = diff
+	dif = diff
+	difff = diff
+	ad = add
+	add = add
