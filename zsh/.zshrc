@@ -34,7 +34,8 @@ SAVEHIST=1000000
 # 1行表示
 case ${OSTYPE} in
   darwin*)
-    PROMPT="%{${fg[magenta]}%}[%n@mac]%{${reset_color}%} %~ %# "
+    PROMPT="%{${fg[green]}%}[%n@linux]%{${reset_color}%} %~ %# "
+    # PROMPT="%K{24}%~ : $%K"
     ;;
   linux*)
     PROMPT="%{${fg[green]}%}[%n@linux]%{${reset_color}%} %~ %# "
@@ -138,7 +139,6 @@ alias ll='ls -l'
 alias vag='vagrant'
 
 alias rm='rm -i'
-alias tig='tig --all'
 alias cp='cp -i'
 alias mv='mv -i'
 
@@ -224,3 +224,7 @@ export PATH=$PYENV_ROOT/bin:$PATH
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 # pip install flake8
+source /Users/hiroto.naya/repos/ride-Android/app/keystore/release.rc
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias ssh='~/ssh-with-changing-profile.sh'
