@@ -228,3 +228,7 @@ source /Users/hiroto.naya/repos/ride-Android/app/keystore/release.rc
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 alias ssh='~/ssh-with-changing-profile.sh'
+
+# go lang
+export PATH="$HOME/.goenv/bin:$PATH"
+eval "$(goenv init -)"
