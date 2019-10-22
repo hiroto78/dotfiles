@@ -401,6 +401,9 @@ autocmd User Rails/config/routes.rb      NeoSnippetSource ~/.vim/snippet/ruby.ra
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
+NeoBundle 'posva/vim-vue'
+autocmd FileType vue syntax sync fromstart
+
 
 "" tern (react)
 NeoBundle 'marijnh/tern_for_vim', {
