@@ -1,0 +1,56 @@
+{
+    "workbench.editor.enablePreview": false,
+    "workbench.colorTheme": "Monokai",
+
+    "editor.fontSize": 12.5,
+
+    "editor.tabSize": 4
+
+    "editor.fontFamily": "Monaco",
+
+    "editor.tabSize": 4,
+    "editor.renderWhitespace": "none",
+
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true
+    },
+
+    "editor.cursorStyle": "block",
+
+    "editor.insertSpaces": true,
+
+    "editor.wordWrap": "off",
+
+    "files.associations": {},
+    "vim.useSystemClipboard":true,
+    "vim.cmdLineInitialColon": true,
+
+    "vim.hlsearch": true,
+
+    "vim.easymotion": true,
+
+    "vim.visualstar": true,
+
+    "vim.useCtrlKeys": true,
+    "vim.normalModeKeyBindings": [
+         {
+             "before": [";"],
+             "after": [":"]
+         }
+    ],
+    "vim.insertModeKeyBindings": [
+         {
+             "before": ["ctrl+d"],
+             "after": ["Ride->debug_log();"]
+         },
+         {
+             "before": ["j", "j"],
+             "after": ["<esc>"]
+         }
+    ]
+
+}

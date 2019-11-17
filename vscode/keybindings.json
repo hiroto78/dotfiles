@@ -1,0 +1,67 @@
+[
+    {
+        "key": "t l",
+        "command": "workbench.action.nextEditor",
+        "when": "editorFocus && vim.mode == 'Normal'"
+    },
+    {
+        "key": "t h",
+        "command": "workbench.action.previousEditor",
+        "when": "editorFocus && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpen",
+        "when": "editorFocus && vim.mode == 'Normal'"
+    },
+    {
+        "key": "t c",
+        "command": "workbench.action.files.newUntitledFile",
+        "when": "editorFocus && vim.mode == 'Normal'"
+    },
+    {
+        "key": "cmd+n",
+        "command": "-workbench.action.files.newUntitledFile",
+        "when": "editorFocus && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "workbench.action.terminal.focus",
+        "when": "editorFocus && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "editor.action.goToDeclaration",
+        "when": "editorFocus && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "deleteAllRight",
+        "when": "editorFocus && vim.mode == 'Normal'"
+    },
+
+    {
+        "key": "ctrl+shift+l",
+        "command": "workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+cmd+down",
+        "command": "-workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+h",
+        "command": "workbench.action.focusFirstEditorGroup",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+cmd+up",
+        "command": "-workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "workbench.action.terminal.focusNext"
+    },
+]
