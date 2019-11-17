@@ -48,6 +48,17 @@ nnoremap <C-a> 0
 inoremap <C-a> <Esc>0<Insert>
 nnoremap <C-e> <C-$>
 inoremap <C-e> <Esc><C-$><Insert>
+
+inoremap <C-d> Ride->debug_log($);
+inoremap <C-l>  =>
+inoremap <C-o>  ->
+"カーソルから行末まで削除
+nnoremap <C-k> d$
+inoremap <C-k> <Esc>d$<Insert>
+"コロンセミコロンの入れ替え
+nnoremap ; :
+nnoremap : ;
+set nocompatible
 "カーソルから行末まで削除
 nnoremap <C-k> d$
 inoremap <C-k> <Esc>d$<Insert>
@@ -183,6 +194,8 @@ set background=dark
 
 " ファイル開くのをツリー型に
 NeoBundle 'scrooloose/nerdtree'
+nnoremap <silent> <C-n><C-n> :NERDTreeToggle<CR>
+nnoremap <silent> <C-m><C-m> :NERDTreeToggle<CR>
 
 " Git, Ggrep が使える
 NeoBundle 'tpope/vim-fugitive'
@@ -251,7 +264,7 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+" inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
@@ -413,10 +426,16 @@ NeoBundle 'marijnh/tern_for_vim', {
 """"""""""""""""""""""""""""""
 " JS のための設定おわり
 """"""""""""""""""""""""""""""
-NeoBundle 'vim-perl/vim-perl'
+" NeoBundle 'vim-perl/vim-perl'
 
 " NeoBundle おわり
 call neobundle#end()
 
 set tags=.tags
 nnoremap <c-i><c-i> :tab tag <c-r><c-w><cr>
+
+" syntax check for perl
+autocmd filetype perl :map <silent><C-c> :cn<CR>
+autocmd filetype perl :map <silent><C-l> :cl<CR>
+autocmd filetype perl :nnoremap <buffer> <silent> X :w<CR>:!perl -c -MVi::QuickFix % <CR>
+autocmd filetype perl :nnoremap <buffer> <silent> E :cf <CR>
