@@ -25,11 +25,14 @@
 
     "editor.wordWrap": "off",
 
-    "files.associations": {},
+    "files.associations": { "*.tx": "html" },
     "vim.useSystemClipboard":true,
     "vim.cmdLineInitialColon": true,
 
     "vim.hlsearch": true,
+    "vim.searchHighlightColor": "rgba(204,190,2,1)",
+
+    "vim.whichwrap": "h,l,<,>,[,]",
 
     "vim.easymotion": true,
 
@@ -52,5 +55,4 @@
              "after": ["<esc>"]
          }
     ]
-
 }
