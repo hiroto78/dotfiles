@@ -2,13 +2,9 @@
     "workbench.editor.enablePreview": false,
     "workbench.colorTheme": "Monokai",
 
-    "editor.fontSize": 12.5,
-
-    "editor.tabSize": 4
+    "editor.fontSize": 11.5,
 
     "editor.fontFamily": "Monaco",
-
-    "editor.tabSize": 4,
     "editor.renderWhitespace": "none",
 
     "files.exclude": {
@@ -54,5 +50,35 @@
              "before": ["j", "j"],
              "after": ["<esc>"]
          }
-    ]
+    ],
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+
+    "editor.tabSize": 2,
+   
+    "comments": "eslintの自動保存",
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+      {
+        "language": "JavaScript",
+        "autoFix": true
+      }
+    ],
+    "comments": "vueファイル内のJavaScriptに対しVeturを無効にする",
+    "vetur.format.defaultFormatter.js": "none",
+    "comments": "Vscodeの自動保存なし",
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "eslint.alwaysShowStatus": true,
+    "terminal.external.osxExec": "iTerm.app",
+    "breadcrumbs.enabled": true,
+    "workbench.sideBar.location": "right",
+    "window.zoomLevel": 1,
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.rightClickCopyPaste": true,
+    "comments": "brew install reattach-to-user-namespace",
+    "terminal.integrated.macOptionClickForcesSelection": true,
+    "tabnine.experimentalAutoImports": true
 }

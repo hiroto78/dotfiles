@@ -24,11 +24,19 @@
         "command": "-workbench.action.files.newUntitledFile",
         "when": "editorFocus && vim.mode == 'Normal'"
     },
+
     {
         "key": "ctrl+shift+l",
         "command": "workbench.action.terminal.focus",
         "when": "editorFocus && vim.mode == 'Normal'"
     },
+    {
+        "key": "ctrl+shift+h",
+        "command": "workbench.action.terminal.focus",
+        "when": "editorFocus && vim.mode == 'Normal'"
+    },
+
+
     {
         "key": "ctrl+i",
         "command": "editor.action.goToDeclaration",
@@ -50,18 +58,32 @@
         "command": "-workbench.action.terminal.focusNextPane",
         "when": "terminalFocus"
     },
+
+
     {
         "key": "ctrl+shift+h",
         "command": "workbench.action.focusFirstEditorGroup",
         "when": "terminalFocus"
     },
     {
+        "key": "ctrl+shift+l",
+        "command": "workbench.action.focusFirstEditorGroup",
+        "when": "terminalFocus"
+    },
+
+
+    {
         "key": "alt+cmd+up",
         "command": "-workbench.action.terminal.focusPreviousPane",
         "when": "terminalFocus"
     },
     {
-        "key": "ctrl+shift+l",
-        "command": "workbench.action.terminal.focusNext"
-    },
+        "key": "ctrl+shift+h",
+        "command": "workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus"
+    }
+
+
+
+
 ]
