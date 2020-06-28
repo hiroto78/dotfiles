@@ -183,6 +183,15 @@ esac
 # vim:set ft=zsh:
 #############################################
 
+function agvim() {
+    if [ "$1" = "" ]
+    then
+        echo 'no arguments';
+        return;
+    fi
+    vim -p `ag -lr $1 $2 | perl -pe 's/\n/ /g'`;
+}
+
 alias sl='ls'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
