@@ -32,8 +32,11 @@
 	ci = commit -a           # modifiedなファイルを全てstageへ
 	ch = checkout
 	co = commit
+	oc = commit
 	df = diff
 	dif = diff
 	difff = diff
 	ad = add
-	add = add
+	addd = add
+[ghq]
+	root = ~/repos/
