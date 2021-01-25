@@ -81,6 +81,11 @@
         "key": "ctrl+shift+h",
         "command": "workbench.action.terminal.focusNextPane",
         "when": "terminalFocus"
+    },
+    {
+  "       key": "ctrl+a",
+  "       command": "cursorHomeSelect",
+  "       when": "editorTextFocus"
     }
 
 

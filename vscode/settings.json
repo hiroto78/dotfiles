@@ -1,8 +1,8 @@
 {
+    "terminal.integrated.macOptionClickForcesSelection": true,
     "workbench.editor.enablePreview": false,
-    "workbench.colorTheme": "Monokai",
 
-    "editor.fontSize": 11.5,
+    "editor.fontSize": 11,
 
     "editor.fontFamily": "Monaco",
     "editor.renderWhitespace": "none",
@@ -26,7 +26,7 @@
     "vim.cmdLineInitialColon": true,
 
     "vim.hlsearch": true,
-    "vim.searchHighlightColor": "rgba(204,190,2,1)",
+    "vim.searchHighlightColor": "rgba(255,255,255, 0.6)",
 
     "vim.whichwrap": "h,l,<,>,[,]",
 
@@ -39,6 +39,10 @@
          {
              "before": [";"],
              "after": [":"]
+         },
+         {
+             "before": ["ctrl+a"],
+             "after": ["^"]
          }
     ],
     "vim.insertModeKeyBindings": [
@@ -49,6 +53,10 @@
          {
              "before": ["j", "j"],
              "after": ["<esc>"]
+         },
+         {
+             "before": ["ctrl+a"],
+             "after": ["ctrl+o", "^"]
          }
     ],
     "editor.suggestSelection": "first",
@@ -72,13 +80,31 @@
       "source.fixAll.eslint": true
     },
     "eslint.alwaysShowStatus": true,
-    "terminal.external.osxExec": "iTerm.app",
     "breadcrumbs.enabled": true,
     "workbench.sideBar.location": "right",
     "window.zoomLevel": 1,
-    "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.rightClickCopyPaste": true,
     "comments": "brew install reattach-to-user-namespace",
-    "terminal.integrated.macOptionClickForcesSelection": true,
-    "tabnine.experimentalAutoImports": true
+    "tabnine.experimentalAutoImports": true,
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.copyOnSelection": true,
+    "dart.flutterSdkPath": "/Users/hiroto.naya/Downloads/flutter",
+    "[dart]": {
+      "editor.formatOnSave": true,
+      "editor.formatOnType": true,
+      "editor.rulers": [
+        80
+      ],
+      "editor.selectionHighlight": false,
+      "editor.suggest.snippetsPreventQuickSuggestions": false,
+      "editor.suggestSelection": "first",
+      "editor.tabCompletion": "onlySnippets",
+      "editor.wordBasedSuggestions": false
+    },
+    "editor.minimap.enabled": false,
+    "workbench.colorCustomizations": {
+        "editor.lineHighlightBackground": "#303030"
+    },
+    "vscode-w3cvalidation.validator-token": "Mon, 14 Sep 2020 09:25:49 GMT"
+
 }
