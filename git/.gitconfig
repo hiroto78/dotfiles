@@ -24,6 +24,7 @@
 	br = branch
 	st = status
 	sh = show
+	sw = switch
 	so = remote show origin
 	ft = fetch
 	up = pull --rebase       # pull rebase
