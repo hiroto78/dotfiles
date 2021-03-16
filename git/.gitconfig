@@ -25,6 +25,9 @@
 	st = status
 	sh = show
 	sw = switch
+	ws = switch
+	swc = switch -c
+	wsc = switch -c
 	so = remote show origin
 	ft = fetch
 	up = pull --rebase       # pull rebase
