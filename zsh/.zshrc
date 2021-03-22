@@ -8,28 +8,22 @@ export EDITOR="vim"
 export CC=/usr/bin/gcc
 # export LS_COLORS='di=36'
 export LSCOLORS=ExFxCxDxBxegedabagacad
-#############################################
-# 少し凝った zshrc
-# # License : MIT
-# # http://mollifier.mit-license.org/
-#  
-#  ########################################
-  # 環境変数
+
+# 環境変数
 export LANG=ja_JP.UTF-8
- 
-   
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
-   
+
 # emacs 風キーバインドにする
 bindkey -e
-    
+
 # ヒストリの設定
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
-    
+
 # プロンプト
 # 1行表示
 case ${OSTYPE} in
@@ -42,8 +36,6 @@ case ${OSTYPE} in
     ;;
 esac
 
-     
-      
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
 select-word-style default
@@ -51,16 +43,16 @@ select-word-style default
 # / も区切りと扱うので、^W でディレクトリ１つ分を削除できる
 zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
-   
+
 ########################################
 # 補完
 # 補完機能を有効にする
 autoload -Uz compinit
 compinit
-    
+
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-     
+
 # ../ の後は今いるディレクトリを補完しない
 zstyle ':completion:*' ignore-parents parent pwd ..
 
@@ -76,10 +68,10 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 # vcs_info
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
-   
+
 zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
-  
+
 function _update_vcs_info_msg() {
 	LANG=en_US.UTF-8 vcs_info
 	RPROMPT="${vcs_info_msg_0_}"
@@ -109,7 +101,7 @@ setopt auto_pushd
 
 # 重複したディレクトリを追加しない
 setopt pushd_ignore_dups
-                                                     
+
 # 同時に起動したzshの間でヒストリを共有する
 setopt share_history
 
@@ -134,6 +126,7 @@ bindkey '^R' history-incremental-pattern-search-backward
 ########################################
 # エイリアス
 
+alias aa='cd /Users/hiroto.naya/repos/ride-server'
 alias la='ls -a'
 alias ll='ls -l'
 alias vag='vagrant'
@@ -164,8 +157,6 @@ elif which putclip >/dev/null 2>&1 ; then
 alias -g C='| putclip'
 fi
 
-
-
 ########################################
 # OS 別の設定
 case ${OSTYPE} in
@@ -182,7 +173,6 @@ esac
 
 # vim:set ft=zsh:
 #############################################
-
 function agvim() {
     if [ "$1" = "" ]
     then
@@ -241,3 +231,24 @@ alias ssh='~/ssh-with-changing-profile.sh'
 # go lang
 export PATH="$HOME/.goenv/bin:$PATH"
 eval "$(goenv init -)"
+
+alias vim='nvim  $(fzf --height 40% --reverse)'
+alias vi='nvim'
+
+function history-fzf() {
+  local tac
+
+  if which tac > /dev/null; then
+    tac="tac"
+  else
+    tac="tail -r"
+  fi
+
+  BUFFER=$(history -n 1 | eval $tac | fzf --layout=reverse --query "$LBUFFER")
+  CURSOR=$#BUFFER
+
+  zle reset-prompt
+}
+
+zle -N history-fzf
+bindkey '^r' history-fzf
