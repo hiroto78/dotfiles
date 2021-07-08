@@ -234,21 +234,22 @@ eval "$(goenv init -)"
 
 alias vim='nvim  $(fzf --height 40% --reverse)'
 alias vi='nvim'
+alias purevim='vim'
 
-function history-fzf() {
-  local tac
-
-  if which tac > /dev/null; then
-    tac="tac"
-  else
-    tac="tail -r"
-  fi
-
-  BUFFER=$(history -n 1 | eval $tac | fzf --layout=reverse --query "$LBUFFER")
-  CURSOR=$#BUFFER
-
-  zle reset-prompt
-}
-
-zle -N history-fzf
-bindkey '^r' history-fzf
+#function history-fzf() {
+#  local tac
+#
+#  if which tac > /dev/null; then
+#    tac="tac"
+#  else
+#    tac="tail -r"
+#  fi
+#
+#  BUFFER=$(history -nr 1 | eval $tac | fzf --layout=reverse --query "$LBUFFER")
+#  CURSOR=$#BUFFER
+#
+#  zle reset-prompt
+#}
+#
+#zle -N history-fzf
+#bindkey '^r' history-fzf
