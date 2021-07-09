@@ -152,7 +152,10 @@ syntax on
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
 " ステータス行に現在のgitブランチを表示する
-set statusline+=%{fugitive#statusline()}
+" set statusline=%F%m%r%h%w%=\ %{fugitive#statusline()}\ [%{&ff}:%{&fileencoding}]\ [%Y]\ [%04l,%04v]\ [%l/%L]\ %{strftime(\"%Y/%m/%d\ %H:%M:%S\")}
+" set statusline+=%{fugitive#statusline()}
+" let g:airline#extensions#tabline#fnamemod = ':.'
+" let g:airline#extensions#tabline#fnamecollapse = 0
 "
 """""""""""""""""""""""""""
 " fzf
