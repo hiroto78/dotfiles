@@ -105,8 +105,9 @@ set nocompatible
 nnoremap <C-k> d$
 inoremap <C-k> <Esc>d$<Insert>
 
-nnoremap ; :
-nnoremap : ;
+" tabnine は pumvisible()が効かないようなのでこれで対応
+inoremap <C-J> <C-Y>
+
 
 """""""""""""""""""""""""""
 " setting
