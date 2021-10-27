@@ -5,7 +5,7 @@
     "editor.fontSize": 11,
 
     "editor.fontFamily": "Monaco",
-    "editor.renderWhitespace": "none",
+    "editor.renderWhitespace": "all",
 
     "files.exclude": {
       "**/.git": true,
@@ -105,6 +105,16 @@
     "workbench.colorCustomizations": {
         "editor.lineHighlightBackground": "#303030"
     },
-    "vscode-w3cvalidation.validator-token": "Mon, 14 Sep 2020 09:25:49 GMT"
+    "vscode-w3cvalidation.validator-token": "Mon, 14 Sep 2020 09:25:49 GMT",
+    "mssql.connections": [
+      {
+        "server": "{{put-server-name-here}}",
+        "database": "{{put-database-name-here}}",
+        "user": "{{put-username-here}}",
+        "password": "{{put-password-here}}"
+      }
+    ],
+    "workbench.activityBar.visible": false,
+    "editor.inlineSuggest.enabled": true
 
 }
