@@ -1,0 +1,4 @@
+--append=yes
+--recurse=yes
+--langmap=Perl:+.pm
+--php-kinds=cfd
