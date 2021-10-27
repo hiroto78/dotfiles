@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+current_branch = `git branch | grep '*'`.chomp.sub('* ', '')
+if /^feature\/(\d+)-.*/ =~ current_branch
+  ticket_no = $1
+  commit_msgs = File.readlines(ARGV[0])
+  exit 0 if commit_msgs.any? {|msg| msg =~ /\[##{ticket_no}\]/}
+  open(ARGV[0], 'w') {|file|
+    file.print "[##{ticket_no}] "
+    file.puts commit_msgs
+  }
+end

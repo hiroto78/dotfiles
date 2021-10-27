@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+
+class String
+  # colorization
+  #   from http://stackoverflow.com/questions/1489183/colorized-ruby-output
+  def colorize(color_code)
+    "\e[#{color_code}m#{self}\e[0m"
+  end
+  def red ; colorize(31) ; end
+  def green ; colorize(32) ; end
+  def yellow ; colorize(33) ; end
+  def pink ; colorize(35) ; end
+end
+
+
+checks = %w{
+  debugger
+  byebug
+  logger
+  puts
+  console.log
+  debug_log
+}
+
+warnings = [
+  'TODO',
+  'FIXME',
+  'naya',
+  '=='
+]
+
+
+errors = []
+
+files_changed = `git diff --cached --name-only HEAD`
+files_changed.each_line do |filename|
+  filename.chomp!
+  changes = `git diff --cached -U0 HEAD -- "#{filename}"`
+  checks.each do |check|
+    result = changes.split(/\n/).grep(/^\+.*#{check}/)
+    unless result.empty?
+      errors << {:name => check, :file => filename, :matches => result}
+    end
+  end
+  warnings.each do |warn|
+    # result = changes.split(/\n/).grep(/^\+.*\b#{warn}\b/)
+    result = changes.split(/\n/).select{|line| line.include?("#{warn}")}
+    unless result.empty?
+      puts "'WRNING: #{warn}' found in file: #{filename}".pink if warn == '=='
+      puts "'WRNING: #{warn}' found in file: #{filename}"
+    end
+  end
+end
+
+unless errors.empty?
+  errors.each do |error|
+    puts "'ERROR: #{error[:name]}' found in file: #{error[:file]}".red
+    error[:matches].each {|m| puts "  -> #{m}" }
+  end
+  puts "=== COMMIT REJECTED.".red
+  exit 1
+end
