@@ -201,34 +201,62 @@ let g:airline#extensions#default#layout = [
 	\ [ 'z', 'b', 'error', 'warning']
 	\ ]
 
+""""""""""""""""""""""""""""
+"" LSP
+""""""""""""""""""""""""""""
+"if empty(globpath(&rtp, 'autoload/lsp.vim'))
+"  finish
+"endif
+"
+"function! s:on_lsp_buffer_enabled() abort
+"  setlocal omnifunc=lsp#complete
+"  setlocal signcolumn=yes
+"  nmap <buffer> gd <plug>(lsp-definition)
+"  nmap <buffer> <f2> <plug>(lsp-rename)
+"  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
+"endfunction
+"
+"augroup lsp_install
+"  au!
+"  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+"augroup END
+"command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
+"
+"let g:lsp_diagnostics_enabled = 1
+"let g:lsp_diagnostics_echo_cursor = 1
+"let g:asyncomplete_auto_popup = 1
+"let g:asyncomplete_auto_completeopt = 0
+"let g:asyncomplete_popup_delay = 100
+"let g:lsp_text_edit_enabled = 0
+"
+"
+"" 補完時にいきなり選択させない
+"" set completeopt=menuone,noinsert
+"set completeopt=longest,noinsert
+"inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
+"inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
+
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+" inoremap <silent><expr> <TAB>
+"   \ pumvisible() ? "\<C-n>" :
+"   \ <SID>check_back_space() ? "\<TAB>" :
+"   \ asyncomplete#force_refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" let g:lsp_diagnostics_enabled = 1
+" let g:lsp_diagnostics_echo_cursor = 1
+" let g:asyncomplete_popup_delay = 200
+" let g:lsp_text_edit_enabled = 0
+
+
+
+
+
 """""""""""""""""""""""""""
-" LSP
+" tags
 """""""""""""""""""""""""""
-if empty(globpath(&rtp, 'autoload/lsp.vim'))
-  finish
-endif
-
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> <f2> <plug>(lsp-rename)
-  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-endfunction
-
-augroup lsp_install
-  au!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
-
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_completeopt = 0
-let g:asyncomplete_popup_delay = 200
-let g:lsp_text_edit_enabled = 1
-
-
 set tags=tags
 nnoremap <c-i><c-i> :tab tag <c-r><c-w><cr>

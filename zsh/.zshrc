@@ -3,7 +3,7 @@ export NODE_PATH=/usr/local/lib/node_modules
 NPM_PATH=/usr/local/bin/npm/bin
 #export PATH=/usr/local/bin:~/bin:$NPM_PATH:$NODE_PATH:$PATH
 #export RBENV_ROOT=/usr/local/var/rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
+# export PATH="$HOME/.rbenv/bin:$PATH"
 export EDITOR="vim"
 export CC=/usr/bin/gcc
 # export LS_COLORS='di=36'
