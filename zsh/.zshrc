@@ -179,7 +179,7 @@ function agvim() {
         echo 'no arguments';
         return;
     fi
-    vim -p `ag -lr $1 $2 | perl -pe 's/\n/ /g'`;
+    vi -p `ag -lr $1 $2 | perl -pe 's/\n/ /g'`;
 }
 
 alias sl='ls'
@@ -197,8 +197,8 @@ nvm use default
 npm_dir=${NVM_PATH}_modules
 export NODE_PATH=$npm_dir
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
 
 function peco-select-history() {
     # historyを番号なし、逆順、最初から表示。
@@ -217,6 +217,11 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+# ruby rbenv
+[[ -d ~/.rbenv ]] && \
+export PATH=${HOME}/.rbenv/bin:${PATH} && \
+eval "$(rbenv init -)"
+
 # pyenv virtualenv
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
@@ -229,8 +234,11 @@ source /Users/hiroto.naya/repos/ride-Android/app/keystore/release.rc
 alias ssh='~/ssh-with-changing-profile.sh'
 
 # go lang
-export PATH="$HOME/.goenv/bin:$PATH"
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
 eval "$(goenv init -)"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
 
 alias vim='nvim  $(fzf --height 40% --reverse)'
 alias vi='nvim'
@@ -253,3 +261,12 @@ alias purevim='vim'
 #
 #zle -N history-fzf
 #bindkey '^r' history-fzf
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/hiroto.naya/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hiroto.naya/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/hiroto.naya/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/hiroto.naya/google-cloud-sdk/completion.zsh.inc'; fi
+
+# tmux 自動起動(vscode のときは tmux 開かない)
+[[ -z "$TMUX" && ! -z "$PS1" && $TERM_PROGRAM != "vscode" ]] && tmux
