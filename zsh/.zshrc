@@ -270,3 +270,5 @@ if [ -f '/Users/hiroto.naya/google-cloud-sdk/completion.zsh.inc' ]; then . '/Use
 
 # tmux 自動起動(vscode のときは tmux 開かない)
 [[ -z "$TMUX" && ! -z "$PS1" && $TERM_PROGRAM != "vscode" ]] && tmux
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
