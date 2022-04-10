@@ -1,7 +1,6 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-
 ### fzf.vim
 [[plugins]]
 repo = 'junegunn/fzf'
@@ -53,12 +52,15 @@ repo = 'mattn/vim-lsp-icons'
 repo = 'hrsh7th/vim-vsnip'
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
+# [[plugins]]
+# repo = 'prabirshrestha/async.vim'
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete.vim'
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+# [[plugins]]
+# repo = 'github/copilot.vim'
 
 [[plugins]]
-repo = 'github/copilot.vim'
+repo = 'w0rp/ale'

@@ -92,18 +92,13 @@ nnoremap <C-e> <C-$>
 inoremap <C-e> <Esc><C-$><Insert>
 
 inoremap <silent> jj <ESC>
-inoremap <C-d> Ride->debug_log($);
-inoremap <C-l>  =>
-inoremap <C-o>  ->
+inoremap <C-d> pp '==================='<cr>pp<cr>
 nnoremap <C-k> d$
 inoremap <C-k> <Esc>d$<Insert>
 
 nnoremap ; :
 nnoremap : ;
 set nocompatible
-
-nnoremap <C-k> d$
-inoremap <C-k> <Esc>d$<Insert>
 
 " tabnine は pumvisible()が効かないようなのでこれで対応
 inoremap <C-J> <C-Y>
@@ -167,7 +162,8 @@ nnoremap <C-g> :Rg<CR>
 nnoremap <C-f><C-f> :Rg <C-r>=expand("<cword>")<CR><CR>
 " 基本的に新規タブで開く
 let g:fzf_action = {
-\ 'enter': 'tab split'
+\ 'enter': 'tab split',
+\ 'ctrl-x': 'split'
 \ }
 """""""""""""""""""""""""""
 " color
@@ -204,6 +200,8 @@ let g:airline#extensions#default#layout = [
 """"""""""""""""""""""""""""
 "" LSP
 """"""""""""""""""""""""""""
+nnoremap <c-i><c-i> :tab split<cr>:LspDefinition<cr>
+
 "if empty(globpath(&rtp, 'autoload/lsp.vim'))
 "  finish
 "endif
@@ -251,12 +249,13 @@ let g:airline#extensions#default#layout = [
 " let g:asyncomplete_popup_delay = 200
 " let g:lsp_text_edit_enabled = 0
 
-
-
-
-
 """""""""""""""""""""""""""
-" tags
+" ale
 """""""""""""""""""""""""""
-set tags=tags
-nnoremap <c-i><c-i> :tab tag <c-r><c-w><cr>
+let g:ale_fixers = {
+\  '*': ['remove_trailing_lines', 'trim_whitespace'],
+\  'javascript': ['eslint'],
+\  'ruby': ['rubocop'],
+\  'go': ['gofmt'],
+\}
+let g:ale_fix_on_save = 1
