@@ -1,17 +1,19 @@
+let username = "hirotonaya"
+
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath+=/Users/hiroto.naya/.cache/dein/repos/github.com/Shougo/dein.vim
+execute 'set runtimepath+=' . '/Users/' . username . '/.cache/dein/repos/github.com/Shougo/dein.vim'
 
 " Required:
-if dein#load_state('/Users/hiroto.naya/.cache/dein')
-  call dein#begin('/Users/hiroto.naya/.cache/dein')
+if dein#load_state('/Users/' . username . '/.cache/dein')
+  call dein#begin('/Users/' . username . '/.cache/dein')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/hiroto.naya/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('/Users/' . username . '/.cache/dein/repos/github.com/Shougo/dein.vim')
   call dein#load_toml('~/.config/nvim/dein.toml', {'lazy': 0})
 
   "Add or remove your plugins here like this:
