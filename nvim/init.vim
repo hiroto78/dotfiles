@@ -98,6 +98,9 @@ inoremap <C-d> pp '==================='<cr>pp<cr>
 nnoremap <C-k> d$
 inoremap <C-k> <Esc>d$<Insert>
 
+nnoremap <C-h> <C-w>w
+nnoremap <C-l> <C-w><C-w>
+
 nnoremap ; :
 nnoremap : ;
 set nocompatible
@@ -165,7 +168,7 @@ nnoremap <C-f><C-f> :Rg <C-r>=expand("<cword>")<CR><CR>
 " 基本的に新規タブで開く
 let g:fzf_action = {
 \ 'enter': 'tab split',
-\ 'ctrl-x': 'split'
+\ 'ctrl-v': 'vsplit'
 \ }
 """""""""""""""""""""""""""
 " color
