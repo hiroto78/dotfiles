@@ -2,8 +2,6 @@ export NODE_PATH=/usr/local/lib/node_modules
 #export PATH=/usr/local/bin:$PATH
 NPM_PATH=/usr/local/bin/npm/bin
 #export PATH=/usr/local/bin:~/bin:$NPM_PATH:$NODE_PATH:$PATH
-#export RBENV_ROOT=/usr/local/var/rbenv
-# export PATH="$HOME/.rbenv/bin:$PATH"
 export EDITOR="vim"
 export CC=/usr/bin/gcc
 # export LS_COLORS='di=36'
@@ -126,7 +124,7 @@ bindkey '^R' history-incremental-pattern-search-backward
 ########################################
 # エイリアス
 
-alias aa='cd /Users/hiroto.naya/repos/ride-server'
+alias aa='~/'
 alias la='ls -a'
 alias ll='ls -l'
 alias vag='vagrant'
@@ -217,50 +215,9 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-# ruby rbenv
-[[ -d ~/.rbenv ]] && \
-export PATH=${HOME}/.rbenv/bin:${PATH} && \
-eval "$(rbenv init -)"
-
-# pyenv virtualenv
-export PYENV_ROOT=$HOME/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-# pip install flake8
-source /Users/hiroto.naya/repos/ride-Android/app/keystore/release.rc
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-alias ssh='~/ssh-with-changing-profile.sh'
-
-# go lang
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
-eval "$(goenv init -)"
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
-
 alias vim='nvim  $(fzf --height 40% --reverse)'
 alias vi='nvim'
 alias purevim='vim'
-
-#function history-fzf() {
-#  local tac
-#
-#  if which tac > /dev/null; then
-#    tac="tac"
-#  else
-#    tac="tail -r"
-#  fi
-#
-#  BUFFER=$(history -nr 1 | eval $tac | fzf --layout=reverse --query "$LBUFFER")
-#  CURSOR=$#BUFFER
-#
-#  zle reset-prompt
-#}
-#
-#zle -N history-fzf
-#bindkey '^r' history-fzf
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/hiroto.naya/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/hiroto.naya/google-cloud-sdk/path.zsh.inc'; fi
@@ -272,3 +229,15 @@ if [ -f '/Users/hiroto.naya/google-cloud-sdk/completion.zsh.inc' ]; then . '/Use
 [[ -z "$TMUX" && ! -z "$PS1" && $TERM_PROGRAM != "vscode" ]] && tmux
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
+
+# asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+. /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
+fpath=(
+  $(brew --prefix asdf)/etc/bash_completion.d
+  $fpath
+)
+autoload -Uz compinit && compinit
