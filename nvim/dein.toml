@@ -8,8 +8,8 @@ build = './install --all'
 [[plugins]]
 repo = 'junegunn/fzf.vim'
 
-[[plugins]]
-repo = 'zxqfl/tabnine-vim'
+# [[plugins]]
+# repo = 'zxqfl/tabnine-vim'
 
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
@@ -41,26 +41,14 @@ repo = 'sheerun/vim-polyglot'
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 
-# lsp
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-[[plugins]]
-repo = 'mattn/vim-lsp-icons'
-[[plugins]]
-repo = 'hrsh7th/vim-vsnip'
-[[plugins]]
-repo = 'hrsh7th/vim-vsnip-integ'
-# [[plugins]]
-# repo = 'prabirshrestha/async.vim'
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete.vim'
-# [[plugins]]
-# repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
 # [[plugins]]
 # repo = 'github/copilot.vim'
 
 [[plugins]]
 repo = 'w0rp/ale'
+
+# coc
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+source = 'release'
+build = 'coc#util#install()'

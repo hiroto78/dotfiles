@@ -106,8 +106,7 @@ nnoremap : ;
 set nocompatible
 
 " tabnine は pumvisible()が効かないようなのでこれで対応
-inoremap <C-J> <C-Y>
-
+" inoremap <C-J> <C-Y>
 
 """""""""""""""""""""""""""
 " setting
@@ -202,58 +201,6 @@ let g:airline#extensions#default#layout = [
 	\ [ 'z', 'b', 'error', 'warning']
 	\ ]
 
-""""""""""""""""""""""""""""
-"" LSP
-""""""""""""""""""""""""""""
-nnoremap <c-i><c-i> :tab split<cr>:LspDefinition<cr>
-
-"if empty(globpath(&rtp, 'autoload/lsp.vim'))
-"  finish
-"endif
-"
-"function! s:on_lsp_buffer_enabled() abort
-"  setlocal omnifunc=lsp#complete
-"  setlocal signcolumn=yes
-"  nmap <buffer> gd <plug>(lsp-definition)
-"  nmap <buffer> <f2> <plug>(lsp-rename)
-"  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-"endfunction
-"
-"augroup lsp_install
-"  au!
-"  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-"augroup END
-"command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
-"
-"let g:lsp_diagnostics_enabled = 1
-"let g:lsp_diagnostics_echo_cursor = 1
-"let g:asyncomplete_auto_popup = 1
-"let g:asyncomplete_auto_completeopt = 0
-"let g:asyncomplete_popup_delay = 100
-"let g:lsp_text_edit_enabled = 0
-"
-"
-"" 補完時にいきなり選択させない
-"" set completeopt=menuone,noinsert
-"set completeopt=longest,noinsert
-"inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
-"inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
-
-" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-
-" inoremap <silent><expr> <TAB>
-"   \ pumvisible() ? "\<C-n>" :
-"   \ <SID>check_back_space() ? "\<TAB>" :
-"   \ asyncomplete#force_refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" let g:lsp_diagnostics_enabled = 1
-" let g:lsp_diagnostics_echo_cursor = 1
-" let g:asyncomplete_popup_delay = 200
-" let g:lsp_text_edit_enabled = 0
-
 """""""""""""""""""""""""""
 " ale
 """""""""""""""""""""""""""
@@ -264,3 +211,42 @@ let g:ale_fixers = {
 \  'go': ['gofmt'],
 \}
 let g:ale_fix_on_save = 1
+
+"""""""""""""""""""""""""""
+" coc
+"""""""""""""""""""""""""""
+" Go to definition
+nmap <silent> ii <Plug>(coc-definition)
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+set completeopt=longest,menuone
+
+" Allow move cursor in the suggestions with Tab, ctrl-n/p, and arrows
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+inoremap <expr><cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" COC-VIM TAB SETTINGS END
