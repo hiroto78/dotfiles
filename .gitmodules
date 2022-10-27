@@ -1,6 +1,3 @@
-[submodule "vim/.vim/bundle/neobundle.vim"]
-	path = vim/.vim/bundle/neobundle.vim
-	url = git://github.com/Shougo/neobundle.vim
 [submodule "vim/.vim/color_schema/molokai.vim"]
 	path = vim/.vim/color_schema/molokai.vim
 	url = git@github.com:hiroto78/molokai.git
