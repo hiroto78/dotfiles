@@ -250,3 +250,5 @@ endif
 
 inoremap <expr><cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 " COC-VIM TAB SETTINGS END
+let g:coc_start_at_startup = 0
+autocmd VimEnter * CocStart
