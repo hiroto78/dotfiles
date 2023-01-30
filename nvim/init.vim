@@ -216,15 +216,16 @@ let g:ale_fix_on_save = 1
 " coc
 """""""""""""""""""""""""""
 " Go to definition
-nmap <silent> ii <Plug>(coc-definition)
+" nmap <silent> ii <Plug>(coc-definition)
+nmap <silent> <C-i><C-i> <Plug>(coc-definition)
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 set completeopt=longest,menuone
 
 " Allow move cursor in the suggestions with Tab, ctrl-n/p, and arrows
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -252,3 +253,6 @@ inoremap <expr><cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=c
 " COC-VIM TAB SETTINGS END
 let g:coc_start_at_startup = 0
 autocmd VimEnter * CocStart
+
+
+nnoremap gb :Git blame<CR>
