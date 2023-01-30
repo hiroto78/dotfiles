@@ -1,6 +1,7 @@
 export NODE_PATH=/usr/local/lib/node_modules
 #export PATH=/usr/local/bin:$PATH
 NPM_PATH=/usr/local/bin/npm/bin
+eval $(/opt/homebrew/bin/brew shellenv)
 #export PATH=/usr/local/bin:~/bin:$NPM_PATH:$NODE_PATH:$PATH
 export EDITOR="vim"
 export CC=/usr/bin/gcc
@@ -122,45 +123,6 @@ setopt extended_glob
 bindkey '^R' history-incremental-pattern-search-backward
 
 ########################################
-# エイリアス
-
-alias aa='~/'
-alias la='ls -a'
-alias ll='ls -l'
-alias vag='vagrant'
-
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-
-alias mkdir='mkdir -p'
-
-# sudo の後のコマンドでエイリアスを有効にする
-alias sudo='sudo '
-
-# グローバルエイリアス
-alias -g L='| less'
-alias -g G='| grep'
-
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-
-# C で標準出力をクリップボードにコピーする
-# mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
-if which pbcopy >/dev/null 2>&1 ; then
-# Mac
-alias -g C='| pbcopy'
-elif which xsel >/dev/null 2>&1 ; then
-# Linux
-alias -g C='| xsel --input --clipboard'
-elif which putclip >/dev/null 2>&1 ; then
-# Cygwin
-alias -g C='| putclip'
-fi
-
-########################################
 # OS 別の設定
 case ${OSTYPE} in
 darwin*)
@@ -174,7 +136,6 @@ alias ls='ls -F --color=auto'
 ;;
 esac
 
-# vim:set ft=zsh:
 #############################################
 function agvim() {
     if [ "$1" = "" ]
@@ -200,21 +161,6 @@ nvm use default
 npm_dir=${NVM_PATH}_modules
 export NODE_PATH=$npm_dir
 
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
-
-function peco-select-history() {
-    # historyを番号なし、逆順、最初から表示。
-    # 順番を保持して重複を削除。
-    # カーソルの左側の文字列をクエリにしてpecoを起動
-    # \nを改行に変換
-    BUFFER="$(history -nr 1 | awk '!a[$0]++' | peco --query "$LBUFFER" | sed 's/\\n/\n/')"
-    CURSOR=$#BUFFER             # カーソルを文末に移動
-    zle -R -c                   # refresh
-}
-zle -N peco-select-history
-bindkey '^R' peco-select-history
-
 # android
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
@@ -235,9 +181,6 @@ if [ -f '/Users/hiroto.naya/google-cloud-sdk/completion.zsh.inc' ]; then . '/Use
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
-
 # asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 . /opt/homebrew/opt/asdf/etc/bash_completion.d/asdf.bash
@@ -246,3 +189,19 @@ fpath=(
   $fpath
 )
 autoload -Uz compinit && compinit
+
+source /Users/hiroto.naya/.docker/init-zsh.sh || true # Added by Docker Desktop
+
+############################
+# WARNING!
+# Put this configuration at the bottom this file.
+############################
+ZSHHOME="${HOME}/.zshlib"
+
+if [ -d $ZSHHOME -a -r $ZSHHOME -a \
+     -x $ZSHHOME ]; then
+    for i in $ZSHHOME/*; do
+        [[ ${i##*/} = *.zsh ]] &&
+            [ \( -f $i -o -h $i \) -a -r $i ] && . $i
+    done
+fi

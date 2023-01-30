@@ -10,6 +10,6 @@ ln -sf /${ROOT}/${USER}/repos/dotfiles/nvim/dein.toml /${ROOT}/${USER}/.config/n
 ln -sf /${ROOT}/${USER}/repos/dotfiles/nvim/init.vim /${ROOT}/${USER}/.config/nvim/init.vim
 ln -sf /${ROOT}/${USER}/repos/dotfiles/nvim/ftplugin /${ROOT}/${USER}/.config/nvim/ftplugin
 ln -sf /${ROOT}/${USER}/repos/dotfiles/zsh/.zshrc /${ROOT}/${USER}/.zshrc
-
+ln -sf /${ROOT}/${USER}/repos/dotfiles/zsh/.zshlib /${ROOT}/${USER}/.zshlib
 ln -sf /${ROOT}/${USER}/repos/dotfiles/vscode/settings.json /${ROOT}/${USER}/Library/Application\ Support/Code/User/settings.json
 ln -sf /${ROOT}/${USER}/repos/dotfiles/vscode/keybindings.json /${ROOT}/${USER}/Library/Application\ Support/Code/User/keybindings.json

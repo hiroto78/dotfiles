@@ -1,1 +1,4 @@
+ .DS_Store
 /vim/.vim/bundle/*
+
+zsh/.zshlib/treasure_data.zsh
