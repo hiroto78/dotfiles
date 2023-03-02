@@ -41,8 +41,8 @@ repo = 'sheerun/vim-polyglot'
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 
-# [[plugins]]
-# repo = 'github/copilot.vim'
+[[plugins]]
+repo = 'github/copilot.vim'
 
 [[plugins]]
 repo = 'w0rp/ale'
@@ -52,3 +52,6 @@ repo = 'w0rp/ale'
 repo = 'neoclide/coc.nvim'
 source = 'release'
 build = 'coc#util#install()'
+
+[[plugins]]
+repo = 'gbprod/yanky.nvim'
