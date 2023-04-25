@@ -65,6 +65,8 @@ set whichwrap=b,s,h,l,<,>,[,]  " 行頭行末の左右移動で行をまたぐ
 set scrolloff=8                " 上下8行の視界を確保
 set sidescrolloff=16           " 左右スクロール時の視界を確保
 set sidescroll=1               " 左右スクロールは一文字づつ行う
+" set spell
+" set spelllang=en_us
 
 
 highlight SpecialKey gui=bold guifg=#839496 guibg=#eee8d5
