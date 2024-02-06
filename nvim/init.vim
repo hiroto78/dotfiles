@@ -1,6 +1,7 @@
 runtime init/base.vim
 runtime init/tab.vim
 runtime init/coc.vim
+runtime init/copilot.vim
 runtime init/ale.vim
 runtime init/search.vim
 runtime init/statusline.vim
