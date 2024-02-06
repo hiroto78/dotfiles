@@ -1,0 +1,20 @@
+#!/bin/sh
+
+COMMIT_MSG_FILE=$1
+
+# Write the diff to the commit message for Copilot hint
+git diff --cached | sed 's/^/# /' >> $COMMIT_MSG_FILE
+
+COMMIT_SOURCE=$2
+SHA1=$3
+
+BRANCH_NAME=$(git branch --show-current)
+PATTERN="^([A-Z]+-[0-9]+)(-.*)?$"
+
+if [[ "$BRANCH_NAME" =~ $PATTERN ]]; then # For Jira, NHT-123-test -> NHT-123:
+    TICKET="${BASH_REMATCH[1]}"
+    echo "$TICKET: $(cat $COMMIT_MSG_FILE)" > $COMMIT_MSG_FILE
+elif [[ "$BRANCH_NAME" =~ ^[0-9]+- ]]; then # For personal e.g. 123-fix-something -> [#123]:
+    TICKET_NUMBER=$(echo $BRANCH_NAME | grep -oE '^[0-9]+')
+    echo "[#$TICKET_NUMBER]: $(cat $COMMIT_MSG_FILE)" > $COMMIT_MSG_FILE
+fi
