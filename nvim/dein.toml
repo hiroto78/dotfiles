@@ -54,4 +54,7 @@ source = 'release'
 build = 'coc#util#install()'
 
 [[plugins]]
-repo = 'gbprod/yanky.nvim'
+repo = 'tpope/vim-rhubarb'
+
+# [[plugins]]
+# repo = 'gbprod/yanky.nvim'
