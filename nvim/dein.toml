@@ -48,6 +48,14 @@ repo = 'github/copilot.vim'
 repo = 'w0rp/ale'
 
 # coc
+# 1. Go to ~/.cache/dein/repos/github.com/neoclide/coc.nvim and yarn install
+# 2. # https://github.com/neoclide/coc-tabnine
+#    - :CocInstall coc-tabnine
+#    - :CocCommand tabnine.updateTabNine
+#    - :CocRestart
+# 3. :CocCommand
+#     tabnine.openConfig
+#     open "ignore_all_lsp": true,
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 source = 'release'

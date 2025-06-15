@@ -2,6 +2,7 @@
     "coc.preferences.jumpCommand": "tabe",
     "coc.prefences.hoverTarget":"echo",
     "coc.prefences.hoverTarget":"preview",
+    "coc.source.emoji.filetypes": ["markdown"],
     "suggest.floatEnable": true,
     "suggest.noselect": false,
     "suggest.keepCompleteopt": true,
